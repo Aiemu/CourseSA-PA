@@ -1,0 +1,84 @@
+%% compile with pdflatex or xelatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{homework}
+
+\title{Programming Assignment 2}
+\duedate{May 24, 2020}
+
+% TODO your name and ID
+\studentname{YOUR NAME}
+\studentid{YOUR TSINGHUA ID}
+
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+
+\let\t\texttt
+
+\begin{document}
+
+\maketitle
+
+\textit{Your should just hand in the implemented file Heap.dfy.}
+
+\textit{Read the instructions below carefully before you start working on the assignment:}
+
+\begin{problem}{A Verified Heap (70\%)}
+
+A binary max-heap is a nearly complete binary tree that can be implemented in an array. Each node of the tree corresponds to an element of the array, and we track the following members to specify the structure:
+
+\begin{enumerate}
+	\item The array $a$, which stores the root of the tree at index 1 (\textbf{not 0}), and should satisfy:
+	$$|a| = |\mathit{nodes}|+1$$
+	\item The current number of nodes in the heap is tracked in $\mathit{size}$, and should satisfy:
+	$$0 \le \mathit{size} \le |a| - 1$$
+	\item The maximum number of nodes that the heap can store in $\mathit{capacity}$, and should satisfy:
+	$$\mathit{capacity}+1 = |a|$$
+\end{enumerate}
+
+At a given index $i$, we can easily compute the parents and children of the corresponding node:
+\begin{align*}
+	\mathit{parent}(i) &= \lfloor i / 2 \rfloor \\
+	\mathit{left}(i) &= 2i \\
+	\mathit{right}(i) &= 2i + 1
+\end{align*}
+
+Max heaps satisfy a property which says that a parent is larger than both of its children:
+$$\forall i . 1 < i \le \mathit{size} \rightarrow a[i] \le a[\mathit{parent}(i)]$$
+
+In this problem, you should implement a binary max-heap with the three operations, 
+i.e., \t{init\_heap}, \t{insert} and \t{extract}. 
+You are given specifications for each operation, 
+and should implement a correct max-heap that satisfies these specifications. 
+In other words, even though the specifications don't capture every property that correct heap operations do, you are expected to provide an implementation that does. 
+So, for example, 
+the insertion operation should place the given value at the correct location in the array, 
+and the extraction operation should remove the greatest element from the heap, 
+and return its value.
+
+A sketch file \t{Heap.dfy} is already provided.
+Please \textbf{complete the implementation} and 
+\textbf{let Dafny compiler verify your code}.
+You shall \textbf{not modify any given code}.
+You may use outside resources to find more information about the algorithms that are typically used to implement these operations, 
+but you should write the annotations necessary to satisfy the specifications yourself.
+
+\end{problem}
+
+% ---------------------------------------------------------------------------
+\newpage
+\begin{problem}{Heap Sort (30\%)}
+
+Use your verified max-heap to implement a heap sort algorithm, 
+which sorts an array of integers in descending order.
+A sketch file \t{Heap.dfy} is already provided.
+You can write the annotations necessary
+i.e., loop invariants, 
+to satisfy the given specifications.
+Please \textbf{complete the implementation} and 
+\textbf{let Dafny compiler verify your code}.
+You shall \textbf{not modify any given code}.
+
+\end{problem}
+
+\end{document}
